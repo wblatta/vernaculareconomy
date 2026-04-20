@@ -14,15 +14,22 @@ class Item extends Model implements HasMedia
 
     protected $fillable = [
         'user_id', 'title', 'description', 'category_id',
-        'condition', 'credit_type', 'custom_credit_value', 'is_available', 'slug',
+        'condition', 'offer_type', 'credit_type', 'custom_credit_value',
+        'is_available', 'is_archived', 'slug',
     ];
 
     protected function casts(): array
     {
         return [
-            'is_available' => 'boolean',
+            'is_available'       => 'boolean',
+            'is_archived'        => 'boolean',
             'custom_credit_value' => 'decimal:2',
         ];
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 
     public function getSlugOptions(): SlugOptions
